@@ -1,0 +1,13 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary files
+temp*.vcf
+report_*.pdf
+
+# macOS
+.DS_Store

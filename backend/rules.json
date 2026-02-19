@@ -1,0 +1,20 @@
+{
+  "CYP2D6": {
+    "*4/*4": "Poor metabolizer"
+  },
+  "CYP2C19": {
+    "*2/*2": "Poor metabolizer"
+  },
+  "CYP2C9": {
+    "*3/*3": "Poor metabolizer"
+  },
+  "SLCO1B1": {
+    "*5/*5": "High toxicity risk"
+  },
+  "TPMT": {
+    "*3A/*3A": "Low activity"
+  },
+  "DPYD": {
+    "*2A/*2A": "Deficient"
+  }
+}
