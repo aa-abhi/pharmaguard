@@ -1,38 +1,47 @@
-🧬 PharmaGuard – Precision Medicine Risk Analyzer
+## 🧬 PharmaGuard – AI-Powered Precision Medicine Risk Analyzer
 
-PharmaGuard is an AI-powered pharmacogenomics web application that analyzes a patient's genetic VCF file and predicts how they will respond to specific medications.
+PharmaGuard is a **pharmacogenomics web application** that analyzes patient genetic data (VCF files) to predict **drug safety, efficacy, and toxicity risks**.
 
-It combines:
+It combines **rule-based pharmacogenomic evaluation** with **AI-generated clinical explanations** to assist in safer medication decisions.
 
-VCF variant parsing
+---
 
-Gene → phenotype mapping
+### Key Features
 
-Rule-based drug risk engine
+- VCF genetic file parsing  
+- Gene → Phenotype mapping  
+- Drug-specific pharmacogenomic risk engine  
+- Confidence scoring mechanism  
+- AI-powered clinical explanation (OpenAI)  
+- Downloadable structured PDF clinical reports  
+- Clean interactive Streamlit UI  
+- FastAPI backend architecture  
 
-AI-generated clinical explanations
+---
 
-Confidence scoring
+### Supported Genes
 
-Downloadable clinical PDF reports
+- **CYP2D6**
+- **CYP2C19**
+- **CYP2C9**
+- **SLCO1B1**
+- **TPMT**
+- **DPYD**
 
-🚀 What Problem Does It Solve?
+---
 
-Drug response varies due to genetic differences.
+### Supported Drugs
 
-PharmaGuard helps determine whether a drug is:
+- **Codeine**
+- **Warfarin**
+- **Simvastatin**
+- **Clopidogrel**
+- **Azathioprine**
+- **Fluorouracil**
 
-🟢 Safe
+---
 
-🟡 Requires dose adjustment
-
-🔴 Ineffective
-
-🔴 Toxic risk
-
-Based on curated pharmacogenomic logic aligned with CPIC-style guidelines.
-
-🏗 Architecture
+### Architecture
 
 Frontend (Streamlit)
 ↓
@@ -46,132 +55,116 @@ Confidence Scoring
 ↓
 PDF Report Generator
 
-📂 Project Structure
+---
+
+### Project Structure
+
 pharmaguard/
 │
 ├── backend/
-│   ├── main.py
-│   ├── parser.py
-│   ├── rules_engine.py
-│   ├── llm.py
-│   ├── pdf_report.py
-│   ├── rules.json
-│   └── schema.py
+│ ├── main.py
+│ ├── parser.py
+│ ├── rules_engine.py
+│ ├── llm.py
+│ ├── pdf_report.py
+│ ├── rules.json
+│ └── schema.py
 │
 ├── frontend/
-│   └── app.py
+│ └── app.py
 │
 ├── sample_vcf/
-│   ├── patient_codeine_normal.vcf
-│   ├── patient_codeine_poor.vcf
-│   ├── patient_simvastatin_toxic.vcf
-│   ├── patient_warfarin_adjust.vcf
-│   └── unknown_risk.vcf
+│ ├── patient_codeine_normal.vcf
+│ ├── patient_codeine_poor.vcf
+│ ├── patient_simvastatin_toxic.vcf
+│ ├── patient_warfarin_adjust.vcf
+│ └── unknown_risk.vcf
 │
 └── README.md
 
-⚙️ How To Run On Your PC
+## How To Run On Your PC
 
 Follow these steps exactly.
 
-1️⃣ Clone The Repository
+
+### 1. Clone The Repository
+
 git clone <your-repo-url>
 cd pharmaguard
 
-2️⃣ Create Virtual Environment
 
-From project root:
+### 2. Create Virtual Environment
+
+##### From project root:
 
 python -m venv .venv
 
+Activate
 
-Activate:
-
-Mac/Linux:
+##### Mac/Linux
 
 source .venv/bin/activate
 
-
-Windows:
+##### Windows
 
 .venv\Scripts\activate
 
-3️⃣ Install Backend Dependencies
-pip install fastapi uvicorn cyvcf2 openai reportlab python-multipart streamlit requests
-
-
-Optional:
+### 3. Install Dependencies
 
 pip install -r requirements.txt
 
-4️⃣ Set OpenAI API Key (For LLM Explanation)
+### 4. Set OpenAI API Key (For LLM Explanation)
 
-Mac/Linux:
+##### Mac/Linux
 
 export OPENAI_API_KEY=your_api_key_here
 
-
-Windows:
+##### Windows
 
 setx OPENAI_API_KEY "your_api_key_here"
 
-
-Restart terminal after setting.
+#### Restart terminal after setting.
 
 If API key is not set, fallback explanation will be used.
 
-5️⃣ Start Backend Server
-
-Go to backend folder:
-
+### 5. Start Backend Server
 cd backend
-
-
-Run:
-
 python -m uvicorn main:app --reload
-
 
 You should see:
 
 Uvicorn running on http://127.0.0.1:8000
 
-6️⃣ Start Frontend
+### 5. Start Frontend
 
-Open new terminal.
+Open a new terminal.
 
 Activate venv again:
 
 source .venv/bin/activate
 
-
-Go to frontend:
+Then:
 
 cd frontend
-
-
-Run:
-
 streamlit run app.py
 
-
-It will open:
+Application will open at:
 
 http://localhost:8501
 
-🧪 Testing With Sample Files
+### Testing With Sample Files
 
 Use files inside sample_vcf/.
 
-Recommended demo order:
-
+Recommended Demo Order
 File	Expected Result
-patient_codeine_normal.vcf	Safe
-patient_codeine_poor.vcf	Ineffective
-patient_warfarin_adjust.vcf	Dose Adjustment
-patient_simvastatin_toxic.vcf	Toxic Risk
-unknown_risk.vcf	Unknown Risk
-📊 Features
+patient_codeine_normal.vcf	🟢 Safe
+patient_codeine_poor.vcf	🔴 Ineffective
+patient_warfarin_adjust.vcf	🟡 Dose Adjustment
+patient_simvastatin_toxic.vcf	🔴 Toxic Risk
+unknown_risk.vcf	⚪ Unknown Risk
+
+### Features Overview
 
 ✔ VCF parsing using cyvcf2
 ✔ STAR allele extraction
@@ -183,70 +176,44 @@ unknown_risk.vcf	Unknown Risk
 ✔ JSON report download
 ✔ Streamlit interactive UI
 
-🔒 Confidence Score Logic
-
+### 🔒 Confidence Score Logic
 Confidence =
 (number of required genes found in VCF)
 ÷
 (number of genes required for that drug)
 
-Example:
+Example
 
 Required gene present → 100%
 
 Missing gene → 0%
 
-📄 PDF Report Includes
+### PDF Report Includes
 
 Risk severity banner
-
-Drug assessment table
-
-Genetic findings
-
+Structured drug assessment table
+Genetic findings section
 Clinical interpretation
-
 Timestamp
-
 Clinical disclaimer
 
-⚠ Known Warnings
+### ⚠ Known Warnings
 
-You may see VCF contig warnings:
+You may see VCF contig warnings like:
 
 Contig '22' is not defined in the header
 
-
 These are harmless and occur when dummy VCF files omit full contig metadata.
 
-💡 Future Improvements
+#### 🧠 Tech Stack
 
-Multi-gene drug logic (e.g., CYP2C9 + VKORC1 for Warfarin)
+##### Backend
 
-Patient ID input
+- FastAPI
+- Python
+- cyvcf2
+- ReportLab
+- OpenAI API
 
-CPIC reference linking
-
-Deployment on Render + Streamlit Cloud
-
-Authentication layer
-
-Batch patient analysis mode
-
-🧠 Tech Stack
-
-Backend:
-
-FastAPI
-
-Python
-
-cyvcf2
-
-ReportLab
-
-OpenAI API
-
-Frontend:
-
-Streamlit
+##### Frontend
+- Streamlit
