@@ -17,8 +17,6 @@ It combines **rule-based pharmacogenomic evaluation** with **AI-generated clinic
 - Clean interactive Streamlit UI  
 - FastAPI backend architecture  
 
----
-
 ### Supported Genes
 
 - **CYP2D6**
@@ -27,8 +25,6 @@ It combines **rule-based pharmacogenomic evaluation** with **AI-generated clinic
 - **SLCO1B1**
 - **TPMT**
 - **DPYD**
-
----
 
 ### Supported Drugs
 
@@ -39,10 +35,8 @@ It combines **rule-based pharmacogenomic evaluation** with **AI-generated clinic
 - **Azathioprine**
 - **Fluorouracil**
 
----
-
 ### Architecture
-
+```
 Frontend (Streamlit)
 ↓
 Backend API (FastAPI)
@@ -54,11 +48,10 @@ LLM Clinical Explanation Generator
 Confidence Scoring
 ↓
 PDF Report Generator
-
----
+```
 
 ### Project Structure
-
+```
 pharmaguard/
 │
 ├── backend/
@@ -81,47 +74,47 @@ pharmaguard/
 │ └── unknown_risk.vcf
 │
 └── README.md
-
+```
 ## How To Run On Your PC
 
 Follow these steps exactly.
 
 
 ### 1. Clone The Repository
-
+```
 git clone <your-repo-url>
 cd pharmaguard
-
+```
 
 ### 2. Create Virtual Environment
 
 ##### From project root:
 
-python -m venv .venv
+```python -m venv .venv```
 
 Activate
 
 ##### Mac/Linux
 
-source .venv/bin/activate
+```source .venv/bin/activate```
 
 ##### Windows
 
-.venv\Scripts\activate
+```.venv\Scripts\activate```
 
 ### 3. Install Dependencies
 
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 ### 4. Set OpenAI API Key (For LLM Explanation)
 
 ##### Mac/Linux
 
-export OPENAI_API_KEY=your_api_key_here
+```export OPENAI_API_KEY=your_api_key_here```
 
 ##### Windows
 
-setx OPENAI_API_KEY "your_api_key_here"
+```setx OPENAI_API_KEY "your_api_key_here"```
 
 #### Restart terminal after setting.
 
@@ -155,7 +148,7 @@ http://localhost:8501
 ### Testing With Sample Files
 
 Use files inside sample_vcf/.
-
+```
 Recommended Demo Order
 File	Expected Result
 patient_codeine_normal.vcf	🟢 Safe
@@ -163,9 +156,9 @@ patient_codeine_poor.vcf	🔴 Ineffective
 patient_warfarin_adjust.vcf	🟡 Dose Adjustment
 patient_simvastatin_toxic.vcf	🔴 Toxic Risk
 unknown_risk.vcf	⚪ Unknown Risk
-
+```
 ### Features Overview
-
+```
 ✔ VCF parsing using cyvcf2
 ✔ STAR allele extraction
 ✔ Gene → phenotype mapping
@@ -175,13 +168,14 @@ unknown_risk.vcf	⚪ Unknown Risk
 ✔ Clinical PDF report generation
 ✔ JSON report download
 ✔ Streamlit interactive UI
-
+```
 ### 🔒 Confidence Score Logic
+```
 Confidence =
 (number of required genes found in VCF)
 ÷
 (number of genes required for that drug)
-
+```
 Example
 
 Required gene present → 100%
@@ -189,14 +183,14 @@ Required gene present → 100%
 Missing gene → 0%
 
 ### PDF Report Includes
-
+```
 Risk severity banner
 Structured drug assessment table
 Genetic findings section
 Clinical interpretation
 Timestamp
 Clinical disclaimer
-
+```
 ### ⚠ Known Warnings
 
 You may see VCF contig warnings like:
