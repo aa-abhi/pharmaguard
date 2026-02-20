@@ -3,6 +3,13 @@ import requests
 import json
 import base64
 
+import os
+from openai import OpenAI
+
+api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(api_key=api_key)
+
 API_URL = "http://127.0.0.1:8000/analyze"
 
 st.set_page_config(page_title="PharmaGuard", layout="centered")

@@ -11,3 +11,6 @@ report_*.pdf
 
 # macOS
 .DS_Store
+
+.streamlit/secrets.toml
+frontend/.streamlit/secrets.toml
